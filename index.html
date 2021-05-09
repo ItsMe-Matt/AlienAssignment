@@ -1,0 +1,275 @@
+<html lang=en>
+    <head>
+        <title>Web Development 2: Final Assignment</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+
+            
+
+//Alien Function
+
+        moveTimer = null;
+        currentStep = 14;
+        alienCounter = 0;
+        walkCounter = 0;
+
+
+        function takeAStep()
+            {
+                var myAlien = document.getElementsByTagName("img")[0]
+                // .src is in this format: "images/alien/alienrwalk14.gif"
+                currentStep++   // adds one to currentStep
+
+                if(currentStep > 30)
+                {
+                    currentStep = 0
+                }
+
+                myAlien.src = "images/alien/alienrwalk" + currentStep + ".gif"
+            }
+        function takeAStepBack()
+            {
+                var myAlien = document.getElementsByTagName("img")[0]
+                currentStep++
+
+                if(currentStep > 30)
+                {
+                    currentStep = 0
+                }
+
+                myAlien.src = "images/alien/alienlwalk" + currentStep + ".gif"
+            }
+
+        function moveRight()
+        {
+            var myAlien = document.getElementsByTagName("img")[0]
+            takeAStep()
+            myAlien.style.left = parseInt(myAlien.style.left) + 5 + "px"
+        }
+
+        function moveLeft()
+        {
+            var myAlien = document.getElementsByTagName("img")[0]
+            takeAStepBack()
+            myAlien.style.left = parseInt(myAlien.style.left) - 5 + "px"
+        }
+
+        function stopMoving()
+        {
+            if(moveTimer != null)
+            {
+                clearInterval(moveTimer)
+                moveTimer = null
+            }
+        }
+
+// window.onload
+
+        window.onload = function() 
+        {
+            var container = document.getElementById("container")
+        }
+        
+// When the button is clicked, run buttonClicked
+
+        buttonClicked = () => {
+            // if storage is in the textbox, it creates a link that takes you to storage.html
+            if (textbox.value == "storage") 
+            {
+                console.log("storage")
+                var storageLink = document.createElement("a")
+                var storageText = document.createTextNode("click me")
+                storageLink.appendChild(storageText)
+                storageLink.href = "./storage.html"
+                document.body.appendChild(storageLink)
+            }
+        // Alien Stuff
+            if (textbox.value == "alien") 
+            {
+                if (alienCounter == 0) 
+                {
+                    var Alien = document.createElement("img")
+                    Alien.src = "images/alien/alienrwalk14.gif"
+                    Alien.id = "al"
+                    Alien.style.display = ""
+                    Alien.style.left = "50px"
+                    Alien.style.position = "absolute"
+                    document.body.appendChild(Alien)
+                    var myAlien = document.getElementsByTagName("img")[0]
+                    alienCounter++
+                }
+            }
+            if (textbox.value == "walk") 
+            {
+                var myAlien = document.getElementsByTagName('img')[0]        
+                console.log("walkCounter:" + walkCounter)
+                if (walkCounter == 0)
+                {
+                    moveTimer = setInterval(moveRight, 100)
+                    setTimeout(stopMoving, 1000)
+                    setTimeout(function(){walkCounter = 1}, 1100)
+                    console.log("walkCounter:" + walkCounter)  
+                }
+                if (walkCounter == 1)
+                {
+                    moveTimer = setInterval(moveLeft, 100)
+                    setTimeout(stopMoving,1000)
+                    setTimeout(function(){walkCounter = 0}, 1100)
+                    console.log("walkCounter:" + walkCounter) 
+                }
+            }
+            if (textbox.value == "run") 
+            {
+                var myAlien = document.getElementsByTagName('img')[0]        
+                console.log("walkCounter:" + walkCounter)
+                if (walkCounter == 0)
+                {
+                    moveTimer = setInterval(moveRight, 10)
+                    setTimeout(stopMoving, 1000)
+                    setTimeout(function(){walkCounter = 1}, 1100)
+                    console.log("walkCounter:" + walkCounter)  
+                }
+                if (walkCounter == 1)
+                {
+                    moveTimer = setInterval(moveLeft, 10)
+                    setTimeout(stopMoving,1000)
+                    setTimeout(function(){walkCounter = 0}, 1100)
+                    console.log("walkCounter:" + walkCounter) 
+                }
+            }
+            if (textbox.value == "bye") 
+            {
+                var myAlien = document.getElementsByTagName("img")[0]
+                console.log("bye")
+                myAlien.style.display = "none"
+                alienCounter--
+                walkCounter = 0
+            }
+        // Ajax Stuff
+            if (textbox.value == "ajax") {
+                console.log(textbox.value)
+
+                var r = new XMLHttpRequest()
+                r.open("GET", "advice.txt", true)
+                r.onreadystatechange = processData
+                r.send(null)
+
+                function processData()
+                {
+                    if (r.readyState == 4)
+                    {
+                        var h1Text = JSON.parse(r.responseText.toUpperCase())
+                        var text = ""
+
+                        for (let i=0; i<h1Text.length; i++)
+                        {
+                            text = text + " " + h1Text[i]
+                        }
+
+
+                        var header = document.createElement("h1")
+                        var headerText = document.createTextNode(text)
+
+                        header.appendChild(headerText)
+                        document.body.appendChild(header)
+                    }
+                }
+            }
+            //Plugin stuff
+            if (textbox.value == "plugin") 
+            {
+                console.log("plugin")
+
+                var pluginLink = document.createElement("a")
+                var pluginText = document.createTextNode("wow")
+                pluginLink.appendChild(pluginText)
+                pluginLink.href = "./plugin.html"
+
+                document.body.appendChild(pluginLink)
+            }
+
+            if (textbox.value == "test") {
+                console.log(textbox.value)
+            }
+            if (textbox.value == "clear") {
+                console.log(textbox.value)
+                location.reload()
+            }
+
+            //Alphabet Stuff
+            if (textbox.value == "alphabet") {
+                    // run this code
+                    console.log("alphabet")
+                     
+
+                        for(let i = 'z'.charCodeAt(0); i >= 'a'.charCodeAt(0); i--) {
+                            let letters = String.fromCharCode(i)
+                            console.log(letters)
+
+                            let myImages = document.createElement('img')
+                            myImages.height = 40
+                            myImages.width = 40
+                            myImages.src = "/Images/letters/" + letters + ".png"
+                            myImages.id = letters
+
+
+                            document.body.appendChild(myImages);
+                        
+
+                        myImages.onclick = function()
+                        {
+                            let  finalIms = document.getElementsByTagName ('img');
+                            for (i=0; i <  finalIms.length; i++)
+                            {
+                                console.log(finalIms[i].src)
+                                finalIms[i].src = this.src
+                            }
+                        }
+                    }
+ 
+                }
+            //Jquery stuff - Aryan
+            if (textbox.value == "jquery") {
+                    // run this code
+                    console.log("jquery")
+                   
+                    $(function(){
+                        $('img').attr('width', 200)
+
+                        $('.y').click(function(){
+                            $(this).css('border', '10px red solid')
+                        })
+
+                        var $a = $("#a"); 
+                        $a.css("display", $a.css("display") === 'none' ? '' : 'none');
+
+                        var $b = $("#b"); 
+                        $b.css("display", $b.css("display") === 'none' ? '' : 'none');
+
+                        var $c = $("#c"); 
+                        $c.css("display", $c.css("display") === 'none' ? '' : 'none');
+
+                        var $d = $("#d"); 
+                        $d.css("display", $d.css("display") === 'none' ? '' : 'none');
+                    });
+                }
+        }
+        </script>
+    </head>
+    <body>
+        <input type="textbox" placeholder="put text in me" value="" id="textbox">
+        <button id="goButton" onclick="buttonClicked()">Go</button>
+
+        <hr>
+
+        <img src="images/bird.jpg" id="a" class="x" style="display: none;">
+        <img src="images/cat.jpg" id="b" class="y" style="display: none;" >
+        <img src="./Images/dog.jpg" id="c" class="r" style="display: none;">
+        <img src="images/fish.jpg" id="d" class="x" style="display: none;">
+
+    </body>
+
+
+
+</html>

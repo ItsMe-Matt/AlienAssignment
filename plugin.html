@@ -1,0 +1,107 @@
+<head>
+    <title>
+        JS Plugins
+    </title>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1, p {
+            font-family: sans-serif;
+        }
+
+        .LandingScreen {
+            background-color: aqua;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+        }
+
+        .leftCol {
+            width: 50%;
+            background-color: #ffa9a1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .rightCol {
+            width: 50%;
+            background-color: #ffa9a1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .row {
+            background-color: #ffa9a1;
+            width: 100%;
+            display: flex;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class=landingScreen>
+        <div class="leftCol">
+            <a href="https://michalsnik.github.io/aos/"><img src="./images/AOSsc.jpg" width="800rem"></a>
+        </div>
+        <div class="rightCol">
+            <div style="width: 75%;">
+            <h1 style="border-bottom: solid 2px black; padding-bottom: 1rem;"> Animate on Scroll Library </h1>
+            <p style="line-height: 1.6; font-size: 1.5rem;">
+                Animate on scroll library is a library/plugin that helps you animate elements as you scroll down and see them. This is incredibly useful when you are trying to add micro-interactions into your website. It helps your website look a little less like a clickable poster and really helps its style look less old fashioned and more modern. You can go to the offical AOS website by clicking the image on the left.
+                <br>
+                <br>
+                Scroll to see more examples
+            </p>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="leftCol">
+            <div data-aos="fade-up">
+                <p style="font-size: 3rem; padding: 5rem; background-color: violet;">This text will fade up</p>
+            </div>
+        </div>
+
+        <div class="rightCol">
+            <div data-aos="fade-down">
+                <p style="font-size: 3rem; padding: 5rem; background-color: violet;">This text will fade down</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="leftCol">
+            <div data-aos="fade-right">
+                <p style="font-size: 3rem; padding: 5rem; background-color: violet;">This text will fade right</p>
+            </div>
+        </div>
+
+        <div class="rightCol">
+            <div data-aos="fade-left">
+                <p style="font-size: 3rem; padding: 5rem; background-color: violet;">This text will fade left</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="padding-bottom: 10rem; padding-top: 4rem;">
+        <p style="font-size: 2rem; padding: 3rem;text-align: center;">
+            Those are just a couple examples of what this plugin does. It's not a fancy plugin that identifies faces but I do think that this is a useful plugin for website building.
+        </p>
+    </div>
+
+
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>

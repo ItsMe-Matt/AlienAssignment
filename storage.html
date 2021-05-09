@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>What is Local Storage?</title>
+
+    </head>
+    <body>
+        <style>
+            h1, h2, p
+            {
+                text-align: center;
+            }
+        </style>
+    <h1>Local Storage</h1>
+
+    <h2>What is localStorage?</h2>
+    
+    <p>
+       LocalStorage is a way of storing data in your browser. The interesting part is that data in the localStorage cannot be deleted until its manually deleted via javascript. 
+       It will always be present in the browser. (Days, Months, Years)
+    </p>
+   
+
+    <h2>How do you access localStorage?</h2>
+
+    <p>
+        When you rightclick on our mouse, you will see the "inspect" button. When that is pressed, on the navbar is a button called "application".  When the application button is pressed
+        there is a section on the bottom right called "storage". In the storage category you will find the "Local Storage". 
+        In the local storage, you will see a split screen with a "Key" screen on your left, and "Value" screen on your right.
+    </p>
+
+    <h2>How do you remove the data in localStorage?</h2>
+
+    <p>
+        There are 2 ways to remove localStorage:
+        <br>
+        <br>
+        1. type "localStorage.clear()"
+        <br>
+        2. type "localStorage.removeItem("username")"
+        
+    </p>
+
+    <h2>What is the history of localStorage?</h2>
+
+   <p>
+
+    Before localStorage was introduced to browsers, they were using "cookies". Since localStorage is fairly new, some browsers may not support it.
+
+   </p>
+
+   <h2>Extra facts/notes</h2>
+   
+    <p>
+        In the "Key" screen is where you will find the variable you put, and in the "Value" screen is where you will find the value
+        <br>
+        <br>
+
+        You are only allowed to store numbers, strings, booleans. But, you cannot store objects or rays.
+        <br>
+        <br>
+
+        The localStorage is not designed to store a lot of data, it is mainly used to store a small portion of data. 
+        <br>
+        <br>
+        Some uses for localStorage:
+        <br>
+        <br>
+        Storing usernames
+        <br>
+        Storing highscores (Game)
+    </p>
+
+    <h2>Example</h2>
+    <p>I will be giving you an example of how localStorage works</p>
+
+    <fieldset style="margin-bottom: 20px;">
+        <legend>Insert Data</legend>
+        <input id="inpKey" type="text" placeholder="Enter Key..." style="padding: 7px; height: 40px;">
+        <input id="inpValue" type="text" placeholder="Enter Value..." style="padding: 7px; height: 40px;">
+        <button type="button" id="btnInsert" style="padding: 7px; height: 40px;">Insert Data</button>
+    </fieldset>
+
+    <fieldset style="margin-bottom: 20px;">
+        <legend>Local Storage</legend>
+        <div id="lsOutput"></div>
+    </fieldset>
+
+    
+
+    <script>
+        const inpKey = document.getElementById("inpKey");
+        const inpValue = document.getElementById("inpValue");
+        const btnInsert = document.getElementById("btnInsert");
+        const lsOutput = document.getElementById("lsOutput");
+
+        btnInsert.onclick = function () {
+            const key = inpKey.value;
+            const value = inpValue.value;
+
+
+            if (key && value) {
+                localStorage.setItem(key, value);
+                location.reload();
+            }
+
+        };
+
+        for (let i = 0; i <localStorage.length; i++) {
+
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+
+            lsOutput.innerHTML += `${key}: ${value}<br />`;
+        }
+    </script>
+   
+
+    </body>
+    
+</html>
+
