@@ -9,15 +9,16 @@
 
 //Alien Function
 
-        moveTimer = null;
+moveTimer = null;
         currentStep = 14;
         alienCounter = 0;
         walkCounter = 0;
+        runCounter = 0
 
 
         function takeAStep()
             {
-                var myAlien = document.getElementsByTagName("img")[0]
+                var myAlien = document.getElementById("al")
                 // .src is in this format: "images/alien/alienrwalk14.gif"
                 currentStep++   // adds one to currentStep
 
@@ -30,7 +31,7 @@
             }
         function takeAStepBack()
             {
-                var myAlien = document.getElementsByTagName("img")[0]
+                var myAlien = document.getElementById("al")
                 currentStep++
 
                 if(currentStep > 30)
@@ -43,14 +44,14 @@
 
         function moveRight()
         {
-            var myAlien = document.getElementsByTagName("img")[0]
+            var myAlien = document.getElementById("al")
             takeAStep()
             myAlien.style.left = parseInt(myAlien.style.left) + 5 + "px"
         }
 
         function moveLeft()
         {
-            var myAlien = document.getElementsByTagName("img")[0]
+            var myAlien = document.getElementById("al")
             takeAStepBack()
             myAlien.style.left = parseInt(myAlien.style.left) - 5 + "px"
         }
@@ -62,13 +63,6 @@
                 clearInterval(moveTimer)
                 moveTimer = null
             }
-        }
-
-// window.onload
-
-        window.onload = function() 
-        {
-            var container = document.getElementById("container")
         }
         
 // When the button is clicked, run buttonClicked
@@ -85,7 +79,7 @@
                 document.body.appendChild(storageLink)
             }
         // Alien Stuff
-            if (textbox.value == "alien") 
+        if (textbox.value == "alien") 
             {
                 if (alienCounter == 0) 
                 {
@@ -96,13 +90,13 @@
                     Alien.style.left = "50px"
                     Alien.style.position = "absolute"
                     document.body.appendChild(Alien)
-                    var myAlien = document.getElementsByTagName("img")[0]
+                    var myAlien = document.getElementById("al")
                     alienCounter++
                 }
             }
             if (textbox.value == "walk") 
             {
-                var myAlien = document.getElementsByTagName('img')[0]        
+                var myAlien = document.getElementById("al")        
                 console.log("walkCounter:" + walkCounter)
                 if (walkCounter == 0)
                 {
@@ -121,20 +115,20 @@
             }
             if (textbox.value == "run") 
             {
-                var myAlien = document.getElementsByTagName('img')[0]        
+                var myAlien = document.getElementById("al")       
                 console.log("walkCounter:" + walkCounter)
-                if (walkCounter == 0)
+                if (runCounter == 0)
                 {
                     moveTimer = setInterval(moveRight, 10)
                     setTimeout(stopMoving, 1000)
-                    setTimeout(function(){walkCounter = 1}, 1100)
+                    setTimeout(function(){runCounter = 1}, 1100)
                     console.log("walkCounter:" + walkCounter)  
                 }
-                if (walkCounter == 1)
+                if (runCounter == 1)
                 {
                     moveTimer = setInterval(moveLeft, 10)
                     setTimeout(stopMoving,1000)
-                    setTimeout(function(){walkCounter = 0}, 1100)
+                    setTimeout(function(){runCounter = 0}, 1100)
                     console.log("walkCounter:" + walkCounter) 
                 }
             }
@@ -143,9 +137,13 @@
                 var myAlien = document.getElementsByTagName("img")[0]
                 console.log("bye")
                 myAlien.style.display = "none"
-                alienCounter--
+                alienCounter = 0
                 walkCounter = 0
+                runCounter = 0
             }
+
+        
+/*
         // Ajax Stuff
             if (textbox.value == "ajax") {
                 console.log(textbox.value)
@@ -187,14 +185,6 @@
                 pluginLink.href = "./plugin.html"
 
                 document.body.appendChild(pluginLink)
-            }
-
-            if (textbox.value == "test") {
-                console.log(textbox.value)
-            }
-            if (textbox.value == "clear") {
-                console.log(textbox.value)
-                location.reload()
             }
 
             //Alphabet Stuff
@@ -254,19 +244,21 @@
                         $d.css("display", $d.css("display") === 'none' ? '' : 'none');
                     });
                 }
+*/
         }
         </script>
     </head>
     <body>
-        <input type="textbox" placeholder="put text in me" value="" id="textbox">
+        <input type="textbox" placeholder="put text in me" value="alien" id="textbox">
         <button id="goButton" onclick="buttonClicked()">Go</button>
 
         <hr>
-
+        
         <img src="images/bird.jpg" id="a" class="x" style="display: none;">
         <img src="images/cat.jpg" id="b" class="y" style="display: none;" >
         <img src="./Images/dog.jpg" id="c" class="r" style="display: none;">
         <img src="images/fish.jpg" id="d" class="x" style="display: none;">
+
 
     </body>
 
