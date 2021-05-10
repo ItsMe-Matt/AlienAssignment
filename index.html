@@ -9,61 +9,71 @@
 
 //Alien Function
 
-moveTimer = null;
+        moveTimer = null;
         currentStep = 14;
         alienCounter = 0;
-        walkCounter = 0;
-        runCounter = 0
+        isReverse = false;
+        moveTimer = null;
 
 
         function takeAStep()
             {
-                var myAlien = document.getElementById("al")
+                var myAlien = document.getElementById("al");
                 // .src is in this format: "images/alien/alienrwalk14.gif"
-                currentStep++   // adds one to currentStep
+                currentStep++;   // adds one to currentStep
 
                 if(currentStep > 30)
                 {
-                    currentStep = 0
+                    currentStep = 0;
                 }
 
-                myAlien.src = "images/alien/alienrwalk" + currentStep + ".gif"
+                myAlien.src = "images/alien/alienrwalk" + currentStep + ".gif";
             }
         function takeAStepBack()
             {
-                var myAlien = document.getElementById("al")
-                currentStep++
+                var myAlien = document.getElementById("al");
+                currentStep++;
 
                 if(currentStep > 30)
                 {
-                    currentStep = 0
+                    currentStep = 0;
                 }
 
-                myAlien.src = "images/alien/alienlwalk" + currentStep + ".gif"
+                myAlien.src = "images/alien/alienlwalk" + currentStep + ".gif";
             }
 
         function moveRight()
-        {
-            var myAlien = document.getElementById("al")
-            takeAStep()
-            myAlien.style.left = parseInt(myAlien.style.left) + 5 + "px"
-        }
+            {
+                var myAlien = document.getElementById("al");
 
-        function moveLeft()
-        {
-            var myAlien = document.getElementById("al")
-            takeAStepBack()
-            myAlien.style.left = parseInt(myAlien.style.left) - 5 + "px"
-        }
+                if (parseInt(myAlien.style.left) >= window.screen.width - 80) {
+                    isReverse = true;
+                }
+                if (isReverse == true) {
+                    takeAStepBack();
+                    myAlien.style.left = parseInt(myAlien.style.left) - 1 + "px";
+                }
+                if (parseInt(myAlien.style.left) <=  0)
+                {
+                    isReverse = false;
+                }
+                if (isReverse == false)
+                {
+                    takeAStep();
+                    myAlien.style.left = parseInt(myAlien.style.left) + 1 + "px"
+                }
+            }
 
         function stopMoving()
-        {
-            if(moveTimer != null)
             {
-                clearInterval(moveTimer)
-                moveTimer = null
+                if(moveTimer != null)
+                {
+                    isReverse = false;
+                    clearInterval(moveTimer);
+                    moveTimer = null;
+                }
             }
-        }
+        
         
 // When the button is clicked, run buttonClicked
 
@@ -78,59 +88,37 @@ moveTimer = null;
                 storageLink.href = "./storage.html"
                 document.body.appendChild(storageLink)
             }
-        // Alien Stuff
-        if (textbox.value == "alien") 
+       // Alien Stuff
+            if (textbox.value == "alien") 
             {
                 if (alienCounter == 0) 
                 {
-                    var Alien = document.createElement("img")
-                    Alien.src = "images/alien/alienrwalk14.gif"
-                    Alien.id = "al"
-                    Alien.style.display = ""
-                    Alien.style.left = "50px"
-                    Alien.style.position = "absolute"
-                    document.body.appendChild(Alien)
-                    var myAlien = document.getElementById("al")
-                    alienCounter++
+                    var Alien = document.createElement("img");
+                    Alien.src = "images/alien/alienrwalk14.gif";
+                    Alien.id = "al";
+                    Alien.style.display = "";
+                    Alien.style.left = "50px";
+                    Alien.style.position = "absolute";
+                    document.body.appendChild(Alien);
+                    var myAlien = document.getElementById("al");
+                    alienCounter++;
                 }
             }
             if (textbox.value == "walk") 
             {
                 var myAlien = document.getElementById("al")        
-                console.log("walkCounter:" + walkCounter)
-                if (walkCounter == 0)
-                {
-                    moveTimer = setInterval(moveRight, 100)
-                    setTimeout(stopMoving, 1000)
-                    setTimeout(function(){walkCounter = 1}, 1100)
-                    console.log("walkCounter:" + walkCounter)  
-                }
-                if (walkCounter == 1)
-                {
-                    moveTimer = setInterval(moveLeft, 100)
-                    setTimeout(stopMoving,1000)
-                    setTimeout(function(){walkCounter = 0}, 1100)
-                    console.log("walkCounter:" + walkCounter) 
-                }
+                console.log(textbox.value)
+                moveTimer = setInterval(moveRight, 100)   
             }
             if (textbox.value == "run") 
             {
                 var myAlien = document.getElementById("al")       
-                console.log("walkCounter:" + walkCounter)
-                if (runCounter == 0)
-                {
-                    moveTimer = setInterval(moveRight, 10)
-                    setTimeout(stopMoving, 1000)
-                    setTimeout(function(){runCounter = 1}, 1100)
-                    console.log("walkCounter:" + walkCounter)  
-                }
-                if (runCounter == 1)
-                {
-                    moveTimer = setInterval(moveLeft, 10)
-                    setTimeout(stopMoving,1000)
-                    setTimeout(function(){runCounter = 0}, 1100)
-                    console.log("walkCounter:" + walkCounter) 
-                }
+                console.log(textbox.value)
+                moveTimer = setInterval(moveRight, 10)
+            }
+            if (textbox.value == "stop")
+            {
+                stopMoving()
             }
             if (textbox.value == "bye") 
             {
@@ -138,10 +126,8 @@ moveTimer = null;
                 console.log("bye")
                 myAlien.style.display = "none"
                 alienCounter = 0
-                walkCounter = 0
-                runCounter = 0
             }
-
+             
         // Ajax Stuff
             if (textbox.value == "ajax") {
                 console.log(textbox.value)
